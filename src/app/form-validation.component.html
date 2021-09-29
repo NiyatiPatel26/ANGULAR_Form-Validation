@@ -1,0 +1,113 @@
+<div class="container">
+        <h2>{{title}}</h2><br/>
+    <form [formGroup]="profileForm" class="form-horizontal" (ngSubmit)="onSubmit()" novalidate>
+        <div class ="form-group">
+            <label for="name">Name: </label>
+            <input id="name" type="text" formControlName="Name" class='form-control'>
+            <div
+                *ngIf="!profileForm.controls.Name?.valid && (profileForm.controls.Name?.dirty
+                ||profileForm.controls.Name?.touched)">
+                <div [hidden]="!profileForm.controls.Name?.errors?.required">
+                    Name is required!
+                </div>
+                <div [hidden]="!profileForm.controls.Name?.errors?.pattern">
+                    Only characters are allowed!
+                </div>
+            </div>
+        </div>
+    
+        <div class ="form-group">
+            <label for="address">Address: </label>
+            <input id="address" type="text" formControlName="Address" class='form-control'  >
+            <div
+                *ngIf="!profileForm.controls.Address?.valid && (profileForm.controls.Address?.dirty
+                ||profileForm.controls.Address?.touched)">
+                <div [hidden]="!profileForm.controls.Address?.errors?.required">
+                    Address is required!
+                </div>
+            </div>
+        </div>
+        
+        <div class ="form-group">
+            <label for="email">Email ID: </label>
+            <input id="email" type="text" formControlName="Email" class='form-control' >
+            <div
+                *ngIf="!profileForm.controls.Email?.valid && (profileForm.controls.Email?.dirty
+                ||profileForm.controls.Email?.touched)">
+                <div [hidden]="!profileForm.controls.Email?.errors?.required">
+                    Email is required!
+                </div>
+                <div [hidden]="!profileForm.controls.Email?.errors?.email">
+                    Enter a valid email address!
+                </div>
+            </div>
+        </div>
+
+        <div class ="form-group">
+            <label for="phoneno">Phone Number: </label>
+            <input id="phoneno" type="text" formControlName="Phone_No" class='form-control'  >
+            <div
+                *ngIf="!profileForm.controls.Phone_No?.valid && (profileForm.controls.Phone_No?.dirty
+                ||profileForm.controls.Phone_No?.touched)">
+                <div [hidden]="!profileForm.controls.Phone_No?.errors?.required">
+                    Phone Number is required!
+                </div>
+                <div [hidden]="!profileForm.controls.Phone_No?.errors?.pattern">
+                    Only digits are allowed!
+                </div>
+                <div [hidden]="!profileForm.controls.Phone_No?.errors?.minlength && !profileForm.controls.Phone_No?.errors?.maxlength">
+                    Mobile Number should be of 10 digits!
+                </div>
+            </div>
+        </div>
+
+        <div class ="form-group">
+            <label for="pincode">Pin Code: </label>
+            <input id="pincode" type="text" formControlName="Pin_Code" (keyup)="validatePinCode()"class='form-control'  >
+            <div
+                *ngIf="!profileForm.controls.Pin_Code?.valid && (profileForm.controls.Pin_Code?.dirty
+                ||profileForm.controls.Pin_Code?.touched)">
+                <div [hidden]="!profileForm.controls.Pin_Code?.errors?.required">
+                    Pin Code is required!
+                </div>
+                <div [hidden]="!profileForm.controls.Pin_Code?.errors?.minlength && !profileForm.controls.Pin_Code?.errors?.maxlength">
+                    Pin Code should be of 6 digits!
+                </div>
+            </div>
+            <div *ngFor="let code of code"> {{this.code[0].Status[0]}} </div>
+        </div>
+    
+        <div class="form-group">        
+            <div>
+                <p>Complete the form to enable button.</p>
+            </div>
+            <div class="btn-toolbar"  >
+                <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid">Submit</button>
+            </div>
+        </div>
+    </form>
+    <br>
+
+    <div class="container">
+    <h3>USER DETAILS</h3>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Address</th>
+                <th scope="col">Email ID</th>
+                <th scope="col">Phone(Mobile No.)</th>
+                <th scope="col">Pin Code</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of userList" >
+                    <td>{{ user.Name }}</td>
+                    <td>{{ user.Address }}</td>
+                    <td>{{ user.Email }}</td>
+                    <td>{{ user.Phone_No}}</td>
+                    <td>{{ user.Pin_Code}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
