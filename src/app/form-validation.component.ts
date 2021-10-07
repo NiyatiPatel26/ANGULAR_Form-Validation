@@ -26,6 +26,7 @@ export class FormValidationComponent implements OnInit {
   code:Array<any>=new Array();
 
   onSubmit() {
+    this.code=[]
     this.submitted = true;
     this.userList.push(this.profileForm.value);
     if (this.profileForm.invalid) {    
